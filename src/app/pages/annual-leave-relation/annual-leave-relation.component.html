@@ -1,0 +1,15 @@
+<form [formGroup]="annualOrderRelationForm">
+  <div class="form-row">
+    <div class="form-group col-md-2">
+      <label for="inputPassword4">年資</label>
+      <input type="text" class="form-control" id="inputPassword4" formControlName="seniority" [readonly]="userInfo.adminFlag==='N'">
+    </div>
+    <div class="form-group col-md-1">
+      <label for="inputPassword4">天數</label>
+      <input type="number" class="form-control" id="inputPassword4" formControlName="days" [readonly]="userInfo.adminFlag==='N'">
+    </div>
+  </div>
+  <div class="form-row">
+    <button type="submit" class="btn btn-danger" (click)="clickSave()" [disabled]="userInfo.adminFlag==='N'">保存</button>
+  </div>
+</form>

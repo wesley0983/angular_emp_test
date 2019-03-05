@@ -1,0 +1,21 @@
+.btn{
+	margin: 5px;
+}
+.btn-area{
+	display:inline-block;
+}
+td{
+	white-space:nowrap;
+	overflow:hidden;
+	word-break:keep-all;
+}
+.table-responsive{
+	height: 470px;
+}
+.table-head{
+	table-layout: fixed;
+}
+.table-content{
+	overflow-y : scroll;
+}
+	

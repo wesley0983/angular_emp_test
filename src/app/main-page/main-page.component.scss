@@ -1,0 +1,35 @@
+#topBar{
+	position: fixed;
+	width: 100%;
+}
+
+.list-group {
+    position: fixed; 
+	margin:auto;
+	float:left;
+	padding-top:60px;
+   }
+   .lead {
+	
+	margin:auto;
+	left:0;
+	right:0;
+	padding-top:20%;
+   }
+
+   .content{
+	   height: 560px;
+	   width: 83%;
+	   border: 2px solid white;
+	   padding: 60px 20px 20px;
+   }
+
+   #listActive{
+	   background-color: rgba(14, 148, 74, 0.836);
+   }
+   .list-group-item:hover{
+	   background-color: rgb(246, 248, 132);
+	   color: rgb(30, 18, 136);
+   }
+   
+   

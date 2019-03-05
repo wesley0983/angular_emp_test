@@ -1,0 +1,75 @@
+<div class="main">
+  <form [formGroup]="leaveOrderForm">
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="inputEmail4">假別</label>
+        <select class="form-control" formControlName="leaveType">
+          <option value="1">事假</option>
+          <option value="2">病假</option>
+          <option value="3">公假</option>
+          <option value="4">公傷假</option>
+          <option value="5">婚假</option>
+          <option value="6">喪假</option>
+          <option value="8">特休</option>
+          <option value="9">補假</option>
+          <option value="7" *ngIf="sex=='2'">產假</option>
+          <option value="10" *ngIf="sex=='1'">陪產假</option>
+          <option value="11" *ngIf="sex=='2'">生理假</option>
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputPassword4">事由</label>
+        <input type="text" class="form-control" id="inputPassword4" formControlName="cause">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="inputAddress">請假起始日</label>
+        <input type="date" class="form-control" name="arriveDate" format="YYYY-MM-DD" (ngModelChange)="cacularLeaveTime()" formControlName="dateStart">
+      </div>
+      <div class="form-group col-md-1">
+        <label for="inputEmail4">時段</label>
+        <select class="form-control" formControlName="startAmPm" (ngModelChange)="cacularLeaveTime()">
+          <option value="1">上午</option>
+          <option value="2">下午</option>
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputAddress2">請假結束日</label>
+        <input type="date" class="form-control" name="arriveDate" format="YYYY-MM-DD" (ngModelChange)="cacularLeaveTime()" formControlName="dateEnd">
+      </div>
+      <div class="form-group col-md-1">
+        <label for="inputEmail4">時段</label>
+        <select class="form-control" formControlName="endAmPm" (ngModelChange)="cacularLeaveTime()">
+          <option value="1">上午</option>
+          <option value="2">下午</option>
+        </select>
+      </div>
+      <div class="form-group col-md-1">
+        <label for="inputEmail4">時數</label>
+        <input type="text" class="form-control" id="inputPassword4" formControlName="leaveTime">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputPassword4">備註</label>
+        <textarea type="text" class="form-control" id="exampleTextarea" formControlName="remark"></textarea>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="inputPassword4">代理人</label>
+        <div class="form-inline">
+          <input type="text" class="form-control" formControlName="agentName" [readonly]="true" style="width: 160px" placeholder="選取代理人">
+          <button type="button" class="btn btn-danger btn-sm" (click)="clickSearchEmployee()">選取</button>
+          <button type="button" class="btn btn-secondary btn-sm" (click)="cleanEmployee()">清除</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <button type="submit" class="btn btn-danger" (click)="clickSave()">送出</button>
+    </div>
+  </form>
+</div>

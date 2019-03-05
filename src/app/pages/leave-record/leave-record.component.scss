@@ -1,0 +1,23 @@
+td{
+    white-space:nowrap;
+    overflow:hidden;
+    word-break:keep-all;
+}
+
+#inputDefault{
+    width: 240px;
+    margin: 2px;
+}
+.btn{
+    margin: 2px;
+}
+.table-responsive{
+	height: 470px;
+}
+.table-head{
+	table-layout: fixed;
+}
+.table-content{
+	overflow-y : scroll;
+}
+    

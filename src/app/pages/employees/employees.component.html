@@ -1,0 +1,129 @@
+{{hint}}
+<div *ngIf="isListMode && loginUser.adminFlag==='Y'">
+  <div class="form-group">
+    <div class="form-row">
+      <input type="text" class="form-control" placeholder="員工編號或名稱" id="inputDefault" [(ngModel)]="query.keywords">
+      <!-- [ioneQueryLogical]="queryLogicals.OR"
+        [ioneQueryOperator]="queryOperators.CONTAINS" [ioneQueryNames]="['name','no']" -->
+      <!-- <input type="text" class="form-control" [(ngModel)]="query.no" placeholder="員工編號或名稱" id="inputDefault"> -->
+      <button type="button" class="btn btn-dark" (click)="search()">搜尋</button>
+      <button type="button" class="btn btn-danger" (click)="clickAdd()">新增</button>
+      <button type="button" class="btn btn-danger" (click)="clickBatchDelete()">刪除</button>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead class="table-head">
+        <tr class="table-danger">
+          <th scope="col">操作</th>
+          <th scope="col">
+            <input class="" type="checkbox" (change)="toggleAll($event)">
+          </th>
+          <th scope="col">編號</th>
+          <th scope="col">名稱</th>
+          <th scope="col">手機</th>
+          <th scope="col">信箱</th>
+          <th scope="col">到職日</th>
+          <th scope="col">離職日</th>
+          <th scope="col">職稱</th>
+          <th scope="col">管理員</th>
+        </tr>
+      </thead>
+      <tbody class="table-content">
+        <tr *ngFor="let emp of employees" class="table-secondary">
+          <td>
+            <button type="button" class="btn btn-danger btn-sm" (click)="clickEdit(emp)">編輯</button>
+          </td>
+          <td>
+            <input type="checkbox" class="" [(ngModel)]="emp.checked">
+          </td>
+          <td>{{emp.no}}</td>
+          <td>{{emp.name}}</td>
+          <td>{{emp.phone}}</td>
+          <td>{{emp.email}}</td>
+          <td>{{emp.arriveDate | date:"yyyy-MM-dd"}}</td>
+          <td>{{emp.leaveDate | date:"yyyy-MM-dd"}}</td>
+          <td>{{emp.careerName}}</td>
+          <td>
+            <ng-container [ngSwitch]="emp.adminFlag">
+              <ng-container *ngSwitchCase="'Y'">是</ng-container>
+              <ng-container *ngSwitchCase="'N'">否</ng-container>
+            </ng-container>
+          </td>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div *ngIf="!isListMode">
+  <form [formGroup]="selectedEmployeesItemForm">
+    <div class="form-row">
+      <button type="button" class="btn btn-outline-secondary" (click)="backToList()">返回</button>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="emp-no">編號</label>
+        <input formControlName="no" type="text" class="form-control" name="emp-no">
+      </div>
+      <div class="form-group col-md-2">
+        <label for="emp-name">名稱</label>
+        <input formControlName="name" type="text" class="form-control" name="emp-name">
+      </div>
+      <div class="form-group col-md-2">
+        <label for="emp-identification">身分證字號</label>
+        <input formControlName="identification" type="text" class="form-control" name="emp-identification">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="emp-phone">電話</label>
+        <input formControlName="phone" type="text" class="form-control" name="emp-phone">
+      </div>
+      <div class="form-group col-md-3">
+        <label for="emp-email">信箱</label>
+        <input formControlName="email" type="text" class="form-control" name="emp-email">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="inputAddress">到職日</label>
+        <input type="date" class="form-control" name="arriveDate" format="YYYY-MM-DD" formControlName="arriveDate">
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputAddress2">離職日</label>
+        <input type="date" class="form-control" name="arriveDate" format="YYYY-MM-DD" formControlName="leaveDate">
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputPassword4">職稱</label>
+        <input type="text" class="form-control" id="inputPassword4" formControlName="careerName">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="emp-password">密碼</label>
+        <input formControlName="password" type="password" class="form-control" name="emp-password">
+      </div>
+      <div class="form-group col-md-1">
+        <label for="emp-isAdmin">管理員</label>
+        <select class="custom-select" formControlName="adminFlag" name="emp-isAdmin">
+          <option value="Y" selected>是</option>
+          <option value="N">否</option>
+        </select>
+      </div>
+    </div>
+  </form>
+  <form [formGroup]="EmpAnnualLeaveRelationForm">
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="emp-annualLeave-seniority">年資</label>
+        <input formControlName="seniority" type="text" class="form-control" name="emp-annualLeave-seniority" [readonly]="true">
+      </div>
+      <div class="form-group col-md-2">
+        <label for="emp-annualLeave-days">剩餘特休天數</label>
+        <input formControlName="days" type="text" class="form-control " name="emp-annualLeave-days" [readonly]="true">
+      </div>
+    </div>
+    <div class="form-row ">
+      <button type="submit " class="btn btn-danger " (click)="clickSave() ">保存</button>
+    </div>
+  </form>
+</div>

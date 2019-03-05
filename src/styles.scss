@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+@import "scss/bootstrap";
+header{
+    background-color: blue;
+}
+
+.container{
+    display: flex;
+    width:100%;
+    aside{
+        background-color: red;
+        width:70%;
+    }
+    .content{
+        background-color: green;
+        width:30%
+    }
+}
+
+footer{
+    background-color: purple;
+}

@@ -1,0 +1,18 @@
+.modal-body {
+    padding: 0;
+}
+
+.ione-master {
+    height: 450px;
+    .ione-grid {
+        height: 100%;
+        tr {
+            > th:nth-child(1),
+            > td:nth-child(1) {
+                flex: none;
+                min-width: 120px;
+                width: 120px;
+            }
+        }
+    }
+}

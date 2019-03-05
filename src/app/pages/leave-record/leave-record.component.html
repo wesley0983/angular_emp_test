@@ -1,0 +1,136 @@
+<div *ngIf="isListMode">
+  <div class="form-group">
+    <div class="form-row">
+      <!-- <div class="form-group col-md-2">
+        <input type="text" class="form-control" name="name" [(ngModel)]="query.name" placeholder="申請人">
+      </div> -->
+      <div class="form-group col-md-2">
+        <input type="date" class="form-control" name="dateStart" format="YYYY-MM-DD" [(ngModel)]="query.startDate">
+      </div> ~至~
+      <div class="form-group col-md-2">
+        <input type="date" class="form-control" name="dateStart" format="YYYY-MM-DD" [(ngModel)]="query.endDate">
+      </div>
+      <div class="form-group col-md-1">
+        <button type="button" class="btn btn-dark btn-sm" (click)="Search()">搜尋</button>
+      </div>
+      <div class="form-group col-md-1">
+        <button type="button" class="btn btn-danger btn-sm" (click)="ExportExcel()">Excel導出</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="loginUser.adminFlag==='Y'">
+    <input type="checkbox" name="adminFlag" [(ngModel)]="lookForAll" (change)="lookForAllChange($event)">
+    <label for="adminFlag">查看全員工紀錄</label>
+  </div>
+  <div style="color: red">{{hint}}</div>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead class="table-head">
+        <tr class="table-danger">
+          <th scope="col">操作</th>
+          <th scope="col">申請人</th>
+          <th scope="col">申請日</th>
+          <th scope="col">假別</th>
+          <th scope="col">請假起始日</th>
+          <th scope="col">請假結束日</th>
+          <th scope="col">小時</th>
+          <th scope="col">假單狀態</th>
+        </tr>
+      </thead>
+      <tbody class="table-content">
+        <tr *ngFor="let ord of leaveOrders" class="table-secondary">
+          <td>
+            <button type="submit" class="btn btn-danger btn-sm" (click)="showDetail(ord)">查看</button>
+          </td>
+          <td>{{ord.employeeName}}</td>
+          <td>{{ord.no}}</td>
+          <td>
+            <ng-container [ngSwitch]="ord.leaveType">
+              <ng-container *ngSwitchCase="'1'">事假</ng-container>
+              <ng-container *ngSwitchCase="'2'">病假</ng-container>
+              <ng-container *ngSwitchCase="'3'">公假</ng-container>
+              <ng-container *ngSwitchCase="'4'">公傷假</ng-container>
+              <ng-container *ngSwitchCase="'5'">婚假</ng-container>
+              <ng-container *ngSwitchCase="'6'">喪假</ng-container>
+              <ng-container *ngSwitchCase="'7'">產假</ng-container>
+              <ng-container *ngSwitchCase="'8'">特休</ng-container>
+              <ng-container *ngSwitchCase="'9'">補假</ng-container>
+              <ng-container *ngSwitchCase="'10'">陪產假</ng-container>
+              <ng-container *ngSwitchCase="'11'">生理假</ng-container>
+            </ng-container>
+          </td>
+          <td>{{ord.dateStart | date:"yyyy-MM-dd"}}</td>
+          <td>{{ord.dateEnd | date:"yyyy-MM-dd"}}</td>
+          <td>{{ord.leaveTime}}</td>
+          <td>
+            <ng-container [ngSwitch]="ord.status">
+              <ng-container *ngSwitchCase="'1'">待審核</ng-container>
+              <ng-container *ngSwitchCase="'2'">通過</ng-container>
+              <ng-container *ngSwitchCase="'3'">不通過</ng-container>
+            </ng-container>
+          </td>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div *ngIf="!isListMode">
+  <form [formGroup]="leaveOrderForm">
+    <div class="form-row">
+      <button type="button" class="btn btn-outline-secondary" (click)="backToList()">返回</button>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="leaveType">假別</label>
+        <select class="form-control" formControlName="leaveType">
+          <option value="1">事假</option>
+          <option value="2">病假</option>
+          <option value="3">公假</option>
+          <option value="4">公傷假</option>
+          <option value="5">婚假</option>
+          <option value="6">喪假</option>
+          <option value="7">產假</option>
+          <option value="8">特休</option>
+          <option value="9">補假</option>
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="cause">事由</label>
+        <input type="text" class="form-control" id="cause" formControlName="cause">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="dateStart">請假起始日</label>
+        <input type="date" class="form-control" name="dateStart" format="YYYY-MM-DD" formControlName="dateStart">
+      </div>
+      <div class="form-group col-md-3">
+        <label for="dateEnd">請假結束日</label>
+        <input type="date" class="form-control" name="dateEnd" format="YYYY-MM-DD" formControlName="dateEnd">
+      </div>
+      <div class="form-group col-md-1">
+        <label for="leaveTime">請假時數</label>
+        <input type="number" class="form-control" id="leaveTime" formControlName="leaveTime">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="remark">備註</label>
+        <textarea class="form-control" id="remark" formControlName="remark"></textarea>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="agent">代理人</label>
+        <input type="text" class="form-control" id="agent" formControlName="agentName" [readonly]="true">
+      </div>
+      <div class="form-group col-md-2">
+        <label for="status">假單狀態</label>
+        <select formControlName="status" class="form-control">
+          <option ngValue="1" selected>待審核</option>
+          <option ngValue="2">通過</option>
+          <option ngValue="3">不通過</option>
+        </select>
+      </div>
+    </div>
+  </form>
+</div>

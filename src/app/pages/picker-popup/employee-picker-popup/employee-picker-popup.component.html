@@ -1,0 +1,69 @@
+<div class="modal-header">
+    <h3 class="modal-title">請選擇代理人</h3>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Close click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <table class="table table-hover">
+        <thead>
+            <tr class="table-warning">
+                <th scope="col">#</th>
+                <th scope="col">編號</th>
+                <th scope="col">名稱</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let emp of employees" class="table-secondary">
+                <td>
+                    <input type="checkbox" class="" [(ngModel)]="emp.checked" (click)="toggleItem(emp)">
+                </td>
+                <td>{{emp.no}}</td>
+                <td>{{emp.name}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- <div class="ione-master">
+        <div class="row">
+            <div class="ione-master-item-list col-md-12">
+                <form class="form-inline query-area">
+                    <div class="form-group">
+                        <input type="text" class="form-control mr-1" name="no" id="no" placeholder="請輸入員工編號或名稱" [(ngModel)]="query.no">
+                    </div>
+                    <button type="submit" class="ione-btn-active-ione-blue mx-0" (click)="search()">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </form>
+                <div class="pager-area row">
+                    <div class="col-md-12 align-self-center">
+                        <ione-pagination [(pager)]="pager" (pagerChange)="pagerChange()"></ione-pagination>
+                    </div>
+                </div>
+                <div class="data-area">
+                    <table class="table ione-grid">
+                        <thead appFixedThead>
+                            <tr>
+                                <th class="d-flex flex-column align-items-start">
+                                    <div>員工編號</div>
+                                </th>
+                                <th class="d-flex flex-column align-items-start">
+                                    <div>員工名稱</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr [ngClass]="{'selected': brand.checked}" *ngFor="let employee of employees" (click)="toggleItem(employee)" (dblclick)="submitItem(brand)">
+                                <td class="d-flex align-items-center">{{ employee.no }}</td>
+                                <td class="d-flex align-items-center">{{ employee.name }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss('Close click')">取消</button>
+    <button type="button" class="btn btn-outline-dark" (click)="submit()">確定</button>
+</div>

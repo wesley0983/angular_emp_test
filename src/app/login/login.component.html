@@ -1,0 +1,40 @@
+<!-- <div class="wrapper">
+  <form class="login">
+    <p class="title">登入</p>
+    <input [(ngModel)]="loginUser.email" name="userEmail" type="text" placeholder="帳號" autofocus/>
+    <i class="fa fa-user"></i>
+    <input [(ngModel)]="loginUser.password" name="password" type="password" placeholder="密碼" />
+    <h6 style="color: red">{{hint}}</h6>
+    <i class="fa fa-key"></i>
+    <button (click)="submit()">
+      <i class="spinner"></i>
+      <span class="state">登入</span>
+    </button>
+  </form>
+</div> -->
+
+<div class="login-body">
+  <div class="login">
+    <!-- <div class="angle-img">
+      <img src="../../assets/imgs/ANGLE.png" height="300" width="300" alt="angle.png">
+    </div> -->
+    <div class="login-screen">
+      <div class="app-title">
+        <h1>ANGLE HR</h1>
+      </div>
+      <div class="login-form">
+        <div class="control-group">
+          <input type="text" class="login-field" [(ngModel)]="loginUser.email" value="" placeholder="Email" id="login-email" autofocus>
+          <label class="login-field-icon fui-user" for="login-email"></label>
+        </div>
+
+        <div class="control-group">
+          <input type="password" class="login-field" [(ngModel)]="loginUser.password" value="" placeholder="password" id="login-pass">
+          <label class="login-field-icon fui-lock" for="login-pass"></label>
+          <div style="color: red">{{hint}}</div>
+        </div>
+        <button class="btn btn-primary btn-large btn-block" (click)="submit()">login</button>
+      </div>
+    </div>
+  </div>
+</div>
