@@ -1,5 +1,5 @@
 export const userAdmin = {
-    adminFlag: 'Y',
+    adminFlag: 'N',
     createDate: 1541088000000,
     createUserUuid: '73a567ba-fc68-4033-a688-9484950063e1',
     email: 'test@angle.com',
@@ -17,7 +17,7 @@ export const userAdmin = {
 };
 
 export const user = {
-    adminFlag: 'N',
+    adminFlag: 'Y',
     createDate: 1541088000000,
     createUserUuid: '73a567ba-fc68-4033-a688-9484950063e1',
     email: 'test4@angle.com',
